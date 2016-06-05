@@ -1,0 +1,89 @@
+ 
+<!DOCTYPE html>
+<html data-ng-app="github_app">
+
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/git.css">
+	<SCRIPT language="JavaScript" src="js/jquery-2.1.1.js"></SCRIPT>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <title>GitHub Resume</title>   
+  </head>
+
+  <body>
+ 	<form name="githubform" novalidate>
+      <div class="form_container form-group">
+      <div id="mainDiv" style="display: block;position: relative;left: 35%" data-ng-controller="github_ctrl">
+		<h3><span class="label label-default" style="position: relative; left: 10%;">Generate github resume</span></h3><br/>
+        
+        <div class="row form-group"  data-ng-class="{'has-error' : githubform.username.$invalid && !githubform.username.$pristine }">
+        	<div class="col-md-1">
+				<label>Username:</label>
+        	</div>
+        	<div class="col-md-3">
+		        <input  type="text" name="username" data-ng-model="git.name" class="form-control" required/>
+		        <p data-ng-show="(githubform.username.$dirty || submitted) && githubform.username.$invalid && !githubform.username.$pristine" class="help-block"></p>
+        	</div>
+        </div>
+        <br/>
+        
+        <br/>
+        <button type="submit" data-ng-click='display(git)' class="btn btn-primary"  data-ng-disabled="githubform.$invalid" style="position: relative; left: 15%;">Generate</button><br/>
+         <br/>
+        <div ng-show="success">
+        <table>
+        <th colspan="2" class="ng-binding" style="text-align: center;">
+         {{details.login}}'s Resume
+        </th>
+        <tr>
+         <td>Name:</td>
+         <td>{{(details.name) || "N/A"}}</td>
+        </tr>
+            
+        <tr>
+         <td>Email:</td>
+         <td>{{(details.email) || "N/A"}}</td>
+        </tr>
+        
+        <tr>
+         <td>Company:</td>
+         <td>{{(details.company) || "N/A"}}</td>
+        </tr>
+        
+        <tr>
+         <td>Hireable:</td>
+         <td>{{(details.hireable) || "N/A"}}</td>
+        </tr>
+        
+        <tr>
+         <td>Blog:</td>
+         <td>{{(details.blog) || "N/A" }}</td>
+        </tr>
+        
+        <tr>
+         <td>No of Repos:</td>
+         <td>{{details.public_repos}}</td>
+        </tr>
+        
+        <tr>
+         <td>No of Followers:</td>
+         <td>{{details.followers}}</td>
+        </tr>
+       
+        <tr>
+         <td>Languages used:</td>
+         <td><p ng-repeat="value in langs track by $index">{{value}}{{$last ? '' : ' '}}</p></td>
+        </tr> 
+         
+        </table>
+        </div>
+      </div>
+      </div>
+    </form>
+     </body>
+	<script src="js/angular.js"></script>
+    <script src="js/app.js"></script>
+    </html>
+ 
